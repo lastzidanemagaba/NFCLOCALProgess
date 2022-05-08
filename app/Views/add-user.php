@@ -98,20 +98,41 @@
                 success: function(data) { /* other stuff */
                     //var ya =JSON.parse(JSON.stringify(data))
                     //alert(JSON.stringify(data));
-                    func3(data);
+                    func3(data,jsonObj['ran_id']);
                 }
             });
         }
 
-        function func3(dataya) {
+        function func3(dataya,ran_id) {
             $.ajax({
                 url: "<?= site_url('save-user3') ?>",
                 type: "POST",
-                data: { username: dataya },
+                data: { username: dataya,id: ran_id },
                 success: function(response) { /* other stuff */
                     //var ya =JSON.parse(JSON.stringify(data))
                     //alert(JSON.stringify(data));
+                    var urlya = (JSON.stringify(response));
+                    var jsonObj = JSON.parse(urlya);
+                    //console.log(jsonObj['a'] + " | " + jsonObj['rida']);
                     func4(response);
+                }
+            });
+        }
+
+        function func4(datt){
+            var urlya = (JSON.stringify(datt));
+                    var jsonObj = JSON.parse(urlya);
+                    $.ajax({
+                        url: jsonObj['url2']+jsonObj['rida'],
+                type: "POST",
+                cache: false,
+                processData: false,
+                contentType: false,
+                
+                success: function(responseD) { /* other stuff */
+                    //var ya =JSON.parse(JSON.stringify(data))
+                    //alert(JSON.stringify(data));
+                    console.log(responseD);
                 }
             });
         }

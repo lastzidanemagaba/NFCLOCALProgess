@@ -110,17 +110,25 @@ class UserController extends BaseController
     public function saveUser3()
 	{
 		if ($this->request->getMethod() == "post") {
-
+            $ran_id = $this->request->getPost('id');
 			$rida = $this->newencryptdata($ran_id);
             $rida = str_replace('=', '', $rida);
             $a = $this->request->getPost('username');
+            $data = [
+                "a" => $a,
+                "rida" => $rida,
+                "ran_id" => $ran_id,
+                "url2" => "http://localhost:8081/"
+            ];
 
+
+
+
+            return $this->response->setJSON($data);
                
                
 
 
-                return ($a."|".$rida);
-                
                 
 			}
     }
